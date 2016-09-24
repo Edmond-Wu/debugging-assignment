@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g -Wall -pedantic -ansi -std=c99
 OBJS = part1_functions.o main.o
-DEPS = mymalloc.h
+DEPS = part1_functions.h
 
 all: main
 	rm *.o
