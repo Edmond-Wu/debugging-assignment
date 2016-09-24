@@ -28,10 +28,11 @@ void one(const int a, const int b) {
  */
 void two(const char *grade) {
   // you may find the atoi function useful
-  if (grade > 70)
-    printf("%d passed!\n", grade);
+	int g = atoi(grade);
+  if (g > 70)
+    printf("%d passed!\n", g);
   else
-    printf("%d not passed!\n", grade);
+    printf("%d not passed!\n", g);
 }
 
 /**
