@@ -1,8 +1,7 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * Calculates a value (c) based on the input parameters (a, b) and prints
@@ -15,8 +14,8 @@
  *     Input parameter b.
  */
 void one(const int a, const int b) {
-  int c = (a * a) + (b * b);
-  printf("%d^2 + %d^2 = %d", a, b, c);
+  	int c = (a * a) + (b * b);
+  	printf("%d^2 + %d^2 = %d\n", a, b, c);
 }
 
 /**
@@ -27,22 +26,23 @@ void one(const int a, const int b) {
  *     The grade to check.
  */
 void two(const char *grade) {
-  // you may find the atoi function useful
+  	// you may find the atoi function useful
 	int g = atoi(grade);
-  if (g > 70)
-    printf("%d passed!\n", g);
-  else
-    printf("%d not passed!\n", g);
+  	if (g > 70) {
+    		printf("%d passed!\n", g);
+	}
+  	else {
+    		printf("%d not passed!\n", g);
+	}
 }
 
 /**
  * Assigns a pointer (int *p) the value of a stack variable (int x).
  */
 void three() {
-  int x = 4;
-  int *p = x;
-
-  printf("The value of p is: %d\n", *p);
+  	int x = 4;
+  	int *p = x;
+  	printf("The value of p is: %d\n", p);
 }
 
 /**
@@ -53,10 +53,10 @@ void three() {
  *     Value to test.
  */
 void four(const float value) {
-  if (0 < value < 1)
-    printf("The value is between zero and one.\n");
-  else
-    printf("The value is not between zero and one.\n");
+  	if (value > 0 && value < 1)
+    		printf("The value is between zero and one.\n");
+  	else
+    		printf("The value is not between zero and one.\n");
 }
 
 /**
@@ -70,10 +70,10 @@ void four(const float value) {
  *     Second input parameter.
  */
 void five(const int *x, const int *y) {
-  if (x == y)
-    printf("x and y are equal.\n");
-  else
-    printf("x and y are different.\n");
+  	if (*x == *y)
+    		printf("x and y are equal.\n");
+  	else
+    		printf("x and y are different.\n");
 }
 
 /**
@@ -88,8 +88,9 @@ void five(const int *x, const int *y) {
  *     contains the value of the input parameter.
  */
 float *six(const int *x) {
-  float *p = *x;
-  return p;
+  	float *p = malloc(sizeof(float));
+	*p = (float)*x;
+  	return p;
 }
 
 /**
@@ -101,10 +102,11 @@ float *six(const int *x) {
  *
  */
 void seven(const char *a) {
-  if (a >= 'A' && a <= 'z')
-    printf("a is a letter.\n");
-  else
-    printf("a is not a letter.\n");
+	char c = a[0];
+  	if (isalpha(c))
+    		printf("a is a letter.\n");
+  	else
+    		printf("a is not a letter.\n");
 }
 
 /**
@@ -112,27 +114,25 @@ void seven(const char *a) {
  * string "Hello".
  */
 void eight() {
-  char *s = malloc(5);
-
-  s[0] = 'H';
-  s[1] = 'e';
-  s[2] = 'l';
-  s[3] = 'l';
-  s[4] = 'o';
-  s[5] = '\0';
-  printf("%s\n", s);
-
-  free(s);
+  	char *s;
+	s = malloc(6 * sizeof(char));
+  	s[0] = 'H';
+  	s[1] = 'e';
+  	s[2] = 'l';
+  	s[3] = 'l';
+  	s[4] = 'o';
+  	s[5] = '\0';
+  	printf("%s\n", s);
+  	free(s);
 }
 
 /**
  * Assigns a pointer (float *p) a numeric value (12.5).
  */
 void nine() {
-  float *p;
-  p = 12.5;
-
-  printf("The value of p is: %f\n", *p);
+  	float *p;
+  	*p = 12.5;
+  	printf("The value of p is: %f\n", *p);
 }
 
 /**
@@ -149,41 +149,50 @@ void ten(int *x) { x = 0; }
  * prints the concatenated string.
  */
 void eleven(const char *str) {
-  char *s = "Hello ";
-  strcat(s, str);
-  printf("%s\n", s);
+  	char *s = "Hello ";
+	char *new_string = malloc(sizeof(char) * (strlen(s) + strlen(str)));
+	strcat(new_string, s);
+	strcat(new_string, str);
+  	printf("%s\n", new_string);
 }
 
 /**
  * Creates an array of values containing the values {0.0, 0.1, ..., 0.9}.
  */
 void twelve() {
-  float *values;
+  	float values[10];
+  	int i, n = 10;
+  	for (i = 0; i < n; i++)
+    		values[i] = (float)i / n;
 
-  int i, n = 10;
-  for (i = 0; i < n; i++)
-    values[i] = (float)i / n;
-
-  for (i = 0; i < n; i++)
-    printf("%f ", values[i]);
-  printf("\n");
+  	for (i = 0; i < n; i++)
+    		printf("%f ", values[i]);
+  	printf("\n");
 }
 
 /**
  * Creates a 2D array of values and prints out the values on the diagonal.
  */
 void thirteen(int a) {
-  int **values;
-
-  int i, j;
-  values = malloc(10 * sizeof(int));
-  for (i = 0; i < 10; i++)
-    for (j = 0; j < 10; j++)
-      values[i][j] = i * j * a;
-
-  for (i = 0; i < 10; i++)
-    printf("%d ", values[i][i]);
-  printf("\n");
+  	int values[10][10];
+	/*
+	int **values;
+	values = malloc(sizeof(int*) * 10);
+	int x;
+	for (x = 0; x < 10; x++) {
+		values[x] = malloc(sizeof(int) * 10);
+	}
+	*/
+  	int i, j;
+  	for (i = 0; i < 10; i++) {
+    		for (j = 0; j < 10; j++) {
+      			values[i][j] = i * j * a;
+		}
+	}
+  	for (i = 0; i < 10; i++) {
+    		printf("%d ", values[i][i]);
+	}
+  	printf("\n");
 }
 
 /**
@@ -193,19 +202,15 @@ void thirteen(int a) {
  *     Input parameter, used to determine which string is printed.
  */
 void fourteen(const char *s) {
-  switch (s) {
-  case "blue":
-    printf("Orange and BLUE!\n");
-    break;
-
-  case "orange":
-    printf("ORANGE and blue!\n");
-    break;
-
-  default:
-    printf("orange and blue!\n");
-    break;
-  }
+	if (strcmp(s, "blue") == 0) {
+		printf("Orange and BLUE!\n");
+	}
+	else if (strcmp(s, "orange") == 0) {
+		printf("ORANGE and blue!\n");
+	}
+	else {
+		printf("orange and blue!\n");
+	}
 }
 
 /**
@@ -215,16 +220,17 @@ void fourteen(const char *s) {
  *     Input parameter, used to determine which string is printed.
  */
 void fifteen(const int value) {
-  switch (value) {
-  case 1:
-    printf("You passed in the value of one!\n");
-
-  case 2:
-    printf("You passed in the value of two!\n");
-
-  default:
-    printf("You passed in some other value!\n");
-  }
+  	switch (value) {
+  		case 1:
+    			printf("You passed in the value of one!\n");
+			break;
+  		case 2:
+   	 		printf("You passed in the value of two!\n");
+			break;
+  		default:
+    			printf("You passed in some other value!\n");
+			break;
+  	}
 }
 
 /**
@@ -235,8 +241,9 @@ void fifteen(const int value) {
  *     A newly allocated string, stored on the heap, with the value "Hello".
  */
 char *sixteen() {
-  char *s = malloc(5);
-  strcpy(s, "Hello");
+  	char *s;
+	s = malloc(5);
+  	strcpy(s, "Hello");
 }
 
 /**
@@ -246,7 +253,7 @@ char *sixteen() {
  *     The diameter of the circle.
  */
 void seventeen(const int d) {
-  printf("The radius of the circle is: %f.\n", d / 2);
+  	printf("The radius of the circle is: %f.\n", (1.0 * d) / 2);
 }
 
 /**
@@ -255,13 +262,12 @@ void seventeen(const int d) {
  * @param k
  *     The input parameter to manipulate.
  */
-void eighteen(const int k) {
-  k = k * k;
-  k += k;
-  k *= k;
-  k -= 1;
-
-  printf("Result: %d\n", k);
+void eighteen(int k) {
+  	k = k * k;
+  	k += k;
+  	k *= k;
+  	k -= 1;
+  	printf("Result: %d\n", k);
 }
 
 /**
@@ -288,7 +294,7 @@ void eighteen(const int k) {
  *     The flag (or mask) used in order to clear bits from "value".
  */
 long int clear_bits(long int value, long int flag) {
-  // TODO clear_bits
+	
 }
 
 
