@@ -28,12 +28,10 @@ void one(const int a, const int b) {
 void two(const char *grade) {
   	// you may find the atoi function useful
 	int g = atoi(grade);
-  	if (g > 70) {
+  	if (g > 70)
     		printf("%f passed!\n", (float)g);
-	}
-  	else {
+  	else
     		printf("%d not passed!\n", g);
-	}
 }
 
 /**
@@ -164,7 +162,6 @@ void twelve() {
   	int i, n = 10;
   	for (i = 0; i < n; i++)
     		values[i] = (float)i / n;
-
   	for (i = 0; i < n; i++)
     		printf("%f ", values[i]);
   	printf("\n");
@@ -179,24 +176,19 @@ void thirteen(int a) {
 	int **values;
 	values = malloc(sizeof(int*) * 10);
 	int x;
-	for (x = 0; x < 10; x++) {
+	for (x = 0; x < 10; x++)
 		values[x] = malloc(sizeof(int) * 10);
-	}
-	
   	int i, j;
   	for (i = 0; i < 10; i++) {
-    		for (j = 0; j < 10; j++) {
+    		for (j = 0; j < 10; j++)
       			values[i][j] = i * j * a;
-		}
 	}
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
     		printf("%d ", values[i][i]);
-	}
 	printf("\n");
 	int y;
-	for (y = 0; y < 10; y++) {
+	for (y = 0; y < 10; y++)
 		free(values[y]);
-	}
 	free(values);
 }
 
@@ -207,15 +199,12 @@ void thirteen(int a) {
  *     Input parameter, used to determine which string is printed.
  */
 void fourteen(const char *s) {
-	if (strcmp(s, "blue") == 0) {
+	if (strcmp(s, "blue") == 0)
 		printf("Orange and BLUE!\n");
-	}
-	else if (strcmp(s, "orange") == 0) {
+	else if (strcmp(s, "orange") == 0)
 		printf("ORANGE and blue!\n");
-	}
-	else {
+	else
 		printf("orange and blue!\n");
-	}
 }
 
 /**
